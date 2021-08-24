@@ -224,12 +224,12 @@ The same response is returned for the following events.
     "producer": "stores/{store_hash}"
 }
 ```
+
 ## Channel
 
 | Name                    | Description                                              |
 |-------------------------|----------------------------------------------------------|
 | `store/channel/*`       | Subscribe to all `store/channel` events.                    |
-
 | `store/channel/created` | Fires when a channel is created via control panel or API |
 | `store/channel/updated` | Fires when a channel is updated via control panel or API |
 
@@ -694,6 +694,8 @@ Changes to the following store settings will trigger a `store/information/update
 
 `store/information/updated`
 
+
+
 ```json
 {
   "scope": "store/information/updated",
@@ -723,7 +725,7 @@ Changes to the following store settings will trigger a `store/information/update
 * `store/subscriber/deleted`
 
 **Response fields**
-- `type` -- Will always be `subscriber`
+- `type` -- Will always be subscriber
 - `id` -- ID of the subscriber
 
 ```json
