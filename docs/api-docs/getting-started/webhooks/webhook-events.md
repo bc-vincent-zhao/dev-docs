@@ -68,13 +68,13 @@ This article contains a complete reference of all BigCommerce webhook events and
 
 | Name | Description |
 |-|-|
-| store/cart/* | Subscribe to all cart events. This will also subscribe you to cart/lineItem. |
-| store/cart/created | This webhook will fire whenever a new cart is created, either via a storefront shopper adding their first item to the cart, or when a new cart is created via an API consumer. If it is from the storefront, then it fires when the first product is added to a new session.(The cart did not exist before). For the API it means a `POST` to /carts, (V3 and Storefront API). The `store/cart/updated` hook will also fire.|
-| store/cart/updated | This webhook is fired whenever a cart is modified through the changes in its line items. Eg. when a new item is added to a cart or an existing item’s quantity is updated. This hook also fires when the email is changed during guest checkout or when an existing item is deleted. The payload will include the ID of the cart being updated. <br> This webhook also fires along with the cart created hook, because the first product being added to an empty cart triggers an update. It will also fire for the following events: <br> - Logging into customer account after creating a cart (email is inherited from customer account email) <br>- Entering email address via guest checkout <br> -Changing the email in guest checkout |
-| store/cart/deleted| This webhook will fire whenever a cart is deleted. This will occur either when all items have been removed from a cart and it is auto-deleted, or when the cart is explicitly removed via a `DELETE` request by an API consumer. This ends the lifecycle of the cart. The  `store/cart/updated`  webhook will also fire when the last item is removed.|
-| store/cart/couponApplied | This webhook will fire whenever a new coupon code is applied to a cart. It will include the ID of the coupon code |
-| store/cart/abandoned | This webhook will fire once after a cart is abandoned. A cart is considered abandoned if no changes have been made for at least one hour after the last modified property. This hook is available for all store plans, regardless of whether the Abandoned Cart Saver feature is enabled.|
-| store/cart/converted | This hook fires when a cart is converted into an order, which is typically after the payment step of checkout on the storefront. At this point, the cart is no longer accessible and has been deleted. This hook returns both the cart ID and order ID for correlation purposes. |
+| `store/cart/*` | Subscribe to all cart events. This will also subscribe you to cart/lineItem. |
+| `store/cart/created` | This webhook will fire whenever a new cart is created, either via a storefront shopper adding their first item to the cart, or when a new cart is created via an API consumer. If it is from the storefront, then it fires when the first product is added to a new session.(The cart did not exist before). For the API it means a `POST` to /carts, (V3 and Storefront API). The `store/cart/updated` hook will also fire.|
+| `store/cart/updated` | This webhook is fired whenever a cart is modified through the changes in its line items. Eg. when a new item is added to a cart or an existing item’s quantity is updated. This hook also fires when the email is changed during guest checkout or when an existing item is deleted. The payload will include the ID of the cart being updated. <br> This webhook also fires along with the cart created hook, because the first product being added to an empty cart triggers an update. It will also fire for the following events: <br> - Logging into customer account after creating a cart (email is inherited from customer account email) <br>- Entering email address via guest checkout <br> -Changing the email in guest checkout |
+| `store/cart/deleted`| This webhook will fire whenever a cart is deleted. This will occur either when all items have been removed from a cart and it is auto-deleted, or when the cart is explicitly removed via a `DELETE` request by an API consumer. This ends the lifecycle of the cart. The  `store/cart/updated`  webhook will also fire when the last item is removed.|
+| `store/cart/couponApplied` | This webhook will fire whenever a new coupon code is applied to a cart. It will include the ID of the coupon code |
+| `store/cart/abandoned` | This webhook will fire once after a cart is abandoned. A cart is considered abandoned if no changes have been made for at least one hour after the last modified property. This hook is available for all store plans, regardless of whether the Abandoned Cart Saver feature is enabled.|
+| `store/cart/converted` | This hook fires when a cart is converted into an order, which is typically after the payment step of checkout on the storefront. At this point, the cart is no longer accessible and has been deleted. This hook returns both the cart ID and order ID for correlation purposes. |
 
 The same response is returned for the following events.
 
@@ -95,8 +95,8 @@ The same response is returned for the following events.
 </div>
 
 **Response fields**
-- type -- can be cart or cart_line_item
-- id -- ID of the cart
+- `type` -- can be `cart` or `cart_line_item`
+- `id` -- ID of the cart
 ```json
 {
     "scope": "store/cart/created",
@@ -114,9 +114,9 @@ The same response is returned for the following events.
 * `store/cart/couponApplied`
 
 **Response fields**
-- type -- can be cart or cart_line_item
-- id -- ID of the cart
-- couponId -- ID of the coupon
+- `type` -- can be `cart` or `cart_line_item`
+- `id` -- ID of the cart
+- `couponId` -- ID of the coupon
 
 ```json
 {
@@ -136,9 +136,10 @@ The same response is returned for the following events.
 * `store/cart/converted`
 
 **Response fields**
-- type -- Will always be cart
-- id - ID of the cart
-- orderId - ID of the order created
+- `type` -- Will always be `cart`
+- `id` - ID of the cart
+- `orderId` - ID of the order created
+  
 ```json
 {
     "scope": "store/cart/converted",
@@ -158,10 +159,10 @@ The same response is returned for the following events.
 
 | Name | Description |
 |-|-|
-| store/cart/lineItem/* | Subscribe to all cart line item events. This webhook will fire when a change occurs to line items in the cart. This can be when items are added to a cart, removed or updated.(Ex. change to quantity, product options or price). |
-| store/cart/lineItem/created | When a new item is added to the cart  |
-| store/cart/lineItem/updated | When an item’s quantity has changed or the product options change. |
-| store/cart/lineItem/deleted | When an item is deleted from the cart|
+| `store/cart/lineItem/*` | Subscribe to all cart line item events. This webhook will fire when a change occurs to line items in the cart. This can be when items are added to a cart, removed or updated.(Ex. change to quantity, product options or price). |
+| `store/cart/lineItem/created` | When a new item is added to the cart  |
+| `store/cart/lineItem/updated` | When an item’s quantity has changed or the product options change. |
+| `store/cart/lineItem/deleted` | When an item is deleted from the cart|
 
 ### The same response is returned for the following endpoints:
 * `store/cart/lineItem/created`
@@ -169,9 +170,9 @@ The same response is returned for the following events.
 * `store/cart/lineItem/deleted`
 
 **Response fields**
-- type -- can be cart or cart_line_item
-- id -- ID of the line item
-- cartId -- ID of the cart
+- `type` -- can be `cart` or `cart_line_item`
+- `id` -- ID of the line item
+- `cartId` -- ID of the cart
 
 ```json
 {
@@ -194,10 +195,10 @@ The same response is returned for the following events.
 
 | Name | Description |
 |-|-|
-| store/category/* | Subscribe to all store/category events |
-| store/category/created | Category is created |
-| store/category/updated | Category is updated |
-| store/category/deleted | Category is deleted |
+| `store/category/*` | Subscribe to all store/category events |
+| `store/category/created` | Category is created |
+| `store/category/updated` | Category is updated |
+| `store/category/deleted` | Category is deleted |
 
 ### The same response is returned for the following endpoints:
 
@@ -207,8 +208,8 @@ The same response is returned for the following events.
 
 **Response fields**
 
-- type -- Will always be category
-- id -- ID of the category
+- `type` -- Will always be category
+- `id` -- ID of the category
 
 ```json
 {
@@ -264,14 +265,14 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 | Name | Description |
 |-|-|
-| store/customer/* | Subscribe to all store/customer events |
-| store/customer/created | A new customer is created|
-| store/customer/updated | Customer is updated. Does not currently track changes to the customer address. |
-| store/customer/deleted | Customer is deleted |
-| store/customer/address/created | Customer address is created |
-| store/customer/address/updated | Customer address is updated |
-| store/customer/address/deleted | Customer address is deleted |
-| store/customer/payment/instrument/default/updated | Customer default payment instrument is updated |
+| `store/customer/*` | Subscribe to all store/customer events |
+| `store/customer/created` | A new customer is created|
+| `store/customer/updated` | Customer is updated. Does not currently track changes to the customer address. |
+| `store/customer/deleted` | Customer is deleted |
+| `store/customer/address/created` | Customer address is created |
+| `store/customer/address/updated` | Customer address is updated |
+| `store/customer/address/deleted` | Customer address is deleted |
+| `store/customer/payment/instrument/default/updated` | Customer default payment instrument is updated |
 
 ### The same response is returned for the following endpoints:
 * `store/customer/created`
@@ -281,8 +282,9 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 **Response fields**
 
-- type -- Will always be customer
-- id -- ID of the customer
+- `type` -- Will always be customer
+- `id` -- ID of the customer
+  
 ```json
 {
     "scope": "store/customer/created",
@@ -302,10 +304,10 @@ Updates to the following fields trigger a `store/channel/updated` event.
 * `store/customer/address/deleted`
 
 **Response fields**
-- type -- Will always be customer
-- id -- ID of the customer address
-- address
-	- customer_id -- ID of the customer
+- `type` -- Will always be `customer`
+- `id` -- ID of the customer address
+- `address`
+	- `customer_id` -- ID of the customer
 
 ```json
 {
@@ -328,13 +330,13 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 | Name | Description |
 |-|-|
-| store/order/* | Subscribe to all store/order events  |
-| store/order/created |Fires if an order is created using the control panel, an app or via the API.|
-| store/order/updated| Fires when an already created order is updated. Any changes to an existing order will fire this webhook. Updates can include changing the status, updating a coupon or changing an address.|
-| store/order/archived | Order is archived |
-| store/order/statusUpdated | This will only fire if the order status has changed. Such as Pending to Awaiting Payment |
-| store/order/message/created | Order message is created by customer or in control panel |
-| store/order/refund/created | A refund has been submitted against an order |
+| `store/order/*` | Subscribe to all store/order events  |
+| `store/order/created` |Fires if an order is created using the control panel, an app or via the API.|
+| `store/order/updated`| Fires when an already created order is updated. Any changes to an existing order will fire this webhook. Updates can include changing the status, updating a coupon or changing an address.|
+| `store/order/archived` | Order is archived |
+| `store/order/statusUpdated` | This will only fire if the order status has changed. Such as Pending to Awaiting Payment |
+| `store/order/message/created` | Order message is created by customer or in control panel |
+| `store/order/refund/created` | A refund has been submitted against an order |
 
 ### The same response is returned for the following events:
 
@@ -343,8 +345,8 @@ Updates to the following fields trigger a `store/channel/updated` event.
 * `store/order/archived`
 
 **Response fields**
-- type -- Will always be order
-- id -- ID of the order
+- `type` -- Will always be order
+- `id` -- ID of the order
 
 ```json
 {
@@ -367,11 +369,11 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 **Response fields**
 
-- type -- Will always be order
-- id -- ID of the order
-- status
-	- previous_status_id -- previous status
-	- new_status_id -- new status
+- `type` -- Will always be `order`
+- `id` -- ID of the order
+- `status`
+	- `previous_status_id` -- previous status
+	- `new_status_id` -- new status
 
 ```json
     "scope": "store/order/statusUpdated",
@@ -396,10 +398,10 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 **Response fields**
 
-- type -- Will always be order
-- id -- Order ID
-- message
-	- order_message_id -- ID of the message on the order
+- `type` -- Will always be `order`
+- `id` -- Order ID
+- `message`
+	- `order_message_id` -- ID of the message on the order
 ```json
 {
     "scope": "store/order/message/created",
@@ -422,10 +424,10 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 **Response fields**
 
-- type -- Will always be order
-- id -- Order ID
-- refund
-	- refund_id -- ID of the refund submitted against the order
+- `type` -- Will always be `order`
+- `id` -- Order ID
+- `refund`
+	- `refund_id` -- ID of the refund submitted against the order
 ```json
 {
     "scope": "store/order/refund/created",
@@ -447,12 +449,12 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 | Name | Description |
 |-|-|
-| store/product/* | Subscribe to all store/product events |
-|store/product/deleted| Product is deleted|
-| store/product/created | A new product is created |
-| store/product/updated |Occurs when product details are edited. For a full list of product fields that trigger an updated event, see **Product updated events** below |
-| store/product/inventory/updated| Product inventory is updated. |
-| store/product/inventory/order/updated| Fires if a product’s inventory is decremented or incremented, including when an order is placed. Webhook responds to inventory updates made using the control panel, CSV import, API or an app.|
+| `store/product/*` | Subscribe to all store/product events |
+|`store/product/deleted`| Product is deleted|
+| `store/product/created` | A new product is created |
+| `store/product/updated` |Occurs when product details are edited. For a full list of product fields that trigger an updated event, see **Product updated events** below |
+| `store/product/inventory/updated`| Product inventory is updated. |
+| `store/product/inventory/order/updated`| Fires if a product’s inventory is decremented or incremented, including when an order is placed. Webhook responds to inventory updates made using the control panel, CSV import, API or an app.|
 
 ### The same response is returned for the following endpoints:
 
@@ -462,8 +464,9 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 **Response fields**
 
-- type -- Will always be product
-- id -- ID of the product
+- `type` -- Will always be `product`
+- `id` -- ID of the product
+
 ```json
 {
     "scope": "store/product/deleted",
@@ -484,14 +487,14 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 **Response Fields**
 
-- type -- Will always be product
-- id -- ID of the product
-- inventory:
-	- product_id -- ID of the product
-	- method
-		- absolute -- inventory updated by an order
-		- relative -- inventory updated using the API or the control panel
-	- value -- the number of items that the inventory changed by. This can be negative if the inventory is decreased `-3` or positive if an item is returned to the inventory from an order, `+2`
+- `type` -- Will always be `product`
+- `id` -- ID of the product
+- `inventory`:
+	- `product_id` -- ID of the product
+	- `method`
+		- `absolute` -- inventory updated by an order
+		- `relative` -- inventory updated using the API or the control panel
+	- `value` -- the number of items that the inventory changed by. This can be negative if the inventory is decreased `-3` or positive if an item is returned to the inventory from an order, `+2`
 
 ```json
 {
@@ -540,10 +543,10 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 | Name | Description |
 |-|-|
-| store/shipment/* | Subscribe to all store/shipment events |
-| store/shipment/created | Shipment is created |
-| store/shipment/updated | Shipment is updated |
-| store/shipment/deleted | Shipment is deleted |
+| `store/shipment/*` | Subscribe to all store/shipment events |
+|` store/shipment/created` | Shipment is created |
+| `store/shipment/updated` | Shipment is updated |
+| `store/shipment/deleted` | Shipment is deleted |
 
 ### The same response is returned for the following endpoints:
 
@@ -552,9 +555,9 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 * `store/shipment/deleted`
 
 **Response fields**
-- type -- Will always be shipment
-- id -- ID of the shipment
-- orderId -- ID of the order
+- `type` -- Will always be `shipment`
+- `id` -- ID of the shipment
+- `orderId` -- ID of the order
 
 ```json
 {
@@ -575,12 +578,12 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 | Name | Description |
 |-|-|
-| store/sku/* |Subscribe to all store/sku events |
-| store/sku/created | A new sku is created |
-| store/sku/updated | SKU is updated |
-| store/sku/deleted| SKU is deleted |
-| store/sku/inventory/updated| SKU is updated|
-| store/sku/inventory/order/updated| This will fire when the inventory is updated via API, the control panel, when an order is placed and when an order is refunded and the inventory is returned to stock. This hook will fire based on a store's Inventory settings. |
+| `store/sku/*` |Subscribe to all store/sku events |
+| `store/sku/created` | A new sku is created |
+| `store/sku/updated` | SKU is updated |
+| `store/sku/deleted`| SKU is deleted |
+| `store/sku/inventory/updated`| SKU is updated|
+| `store/sku/inventory/order/updated`| This will fire when the inventory is updated via API, the control panel, when an order is placed and when an order is refunded and the inventory is returned to stock. This hook will fire based on a store's Inventory settings. |
 
 ### The same response is returned for the following endpoints:
 
@@ -589,10 +592,11 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 * `store/sku/deleted`
 
 **Response fields**
-- type -- Will always be sku
-- id -- ID of the sku
+- `type` -- Will always be `sku`
+- `id` -- ID of the sku
 	- product_id -- ID of the product
 	- variant_id -- ID of the variant
+- 
 ```json
 {
     "scope": "store/sku/created",
@@ -617,15 +621,15 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 **Response fields**
 
-- type -- will always be sku
-- id -- ID of the sku
-- inventory:
-	- product_id -- ID of the product
-	- method
-		- absolute -- inventory updated by an order
-		- relative -- inventory updated using the API or the control panel
-	- value -- the number of items that the inventory changed by. This can be negative if the inventory is decreased `-3` or positive if an item is returned to the inventory from an order, `+2`
-	- variant_id -- ID of the variant
+- `type` -- will always be `sku`
+- `id` -- ID of the sku
+- `inventory`:
+	- `product_id` -- ID of the product
+	- `method`
+		- `absolute` -- inventory updated by an order
+		- `relative` -- inventory updated using the API or the control panel
+	- `value` -- the number of items that the inventory changed by. This can be negative if the inventory is decreased `-3` or positive if an item is returned to the inventory from an order, `+2`
+	- `variant_id` -- ID of the variant
 
 ```json
 {
@@ -652,8 +656,8 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 |Name|Description|
 | - | - |
-| store/app/uninstalled | Occurs when a client store is cancelled and uninstalled from the platform |
-|store/information/updated | Occurs when changes are made to store settings. For a full list of fields that can trigger this event, see **Store information updated events** below |
+| `store/app/uninstalled` | Occurs when a client store is cancelled and uninstalled from the platform |
+|`store/information/updated` | Occurs when changes are made to store settings. For a full list of fields that can trigger this event, see **Store information updated events** below |
 
 ### Store information updated events
 
@@ -689,6 +693,7 @@ Changes to the following store settings will trigger a `store/information/update
 * *Wishlist Enabled*
 
 `store/information/updated`
+
 ```json
 {
   "scope": "store/information/updated",
@@ -703,17 +708,14 @@ Changes to the following store settings will trigger a `store/information/update
 ```
 
 <a id="webhook-events_cart"></a>
-
-
-
 ## Subscriber
 
 | Name | Description |
 |-|-|
-| store/subscriber/* | Subscribe to all store/subscriber events |
-| store/subscriber/created | Subscriber is created |
-| store/subscriber/updated| Subscriber is updated |
-| store/subscriber/deleted | Subscriber is deleted |
+| `store/subscriber/*` | Subscribe to all store/subscriber events |
+| `store/subscriber/created` | Subscriber is created |
+| `store/subscriber/updated`| Subscriber is updated |
+| `store/subscriber/deleted` | Subscriber is deleted |
 
 ### The same response is returned for the following endpoints:
 * `store/subscriber/created`
@@ -721,8 +723,8 @@ Changes to the following store settings will trigger a `store/information/update
 * `store/subscriber/deleted`
 
 **Response fields**
-- type -- Will always be subscriber
-- id -- ID of the subscriber
+- `type` -- Will always be `subscriber`
+- `id` -- ID of the subscriber
 
 ```json
 {
