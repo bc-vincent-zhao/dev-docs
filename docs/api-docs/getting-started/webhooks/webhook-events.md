@@ -39,7 +39,7 @@ This article contains a complete reference of all BigCommerce webhook events and
 }
 ```
 
-| Name | Definition |
+| Webhook scope | Definition |
 | -- | -- |
 | `scope` | The [event](/api-docs/getting-started/webhooks/webhook-events) registered when the webhook was created. |
 | `store_id` | A numerical identifier that is unique to each store. |
@@ -66,7 +66,7 @@ This article contains a complete reference of all BigCommerce webhook events and
 }
 ```
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/cart/*` | Subscribe to all cart events. This will also subscribe you to cart/lineItem. |
 | `store/cart/created` | This webhook will fire whenever a new cart is created, either via a storefront shopper adding their first item to the cart, or when a new cart is created via an API consumer. If it is from the storefront, then it fires when the first product is added to a new session.(The cart did not exist before). For the API it means a `POST` to /carts, (V3 and Storefront API). The `store/cart/updated` hook will also fire.|
@@ -74,7 +74,7 @@ This article contains a complete reference of all BigCommerce webhook events and
 | `store/cart/deleted`| This webhook will fire whenever a cart is deleted. This will occur either when all items have been removed from a cart and it is auto-deleted, or when the cart is explicitly removed via a `DELETE` request by an API consumer. This ends the lifecycle of the cart. The  `store/cart/updated`  webhook will also fire when the last item is removed.|
 | `store/cart/couponApplied` | This webhook will fire whenever a new coupon code is applied to a cart. It will include the ID of the coupon code |
 | `store/cart/abandoned` | This webhook will fire once after a cart is abandoned. A cart is considered abandoned if no changes have been made for at least one hour after the last modified property. This hook is available for all store plans, regardless of whether the Abandoned Cart Saver feature is enabled.|
-| `store/cart/converted` | This hook fires when a cart is converted into an order, which is typically after the payment step of checkout on the storefront. At this point, the cart is no longer accessible and has been deleted. This hook returns both the cart ID and order ID for correlation purposes. |
+| `store/cart/converted` | This hook fires when a cart is converted into an order, which is typically after the payment step of checkout on the storefront. At this point, the cart is no longer accessible and has been deleted. This hook returns both the cart ID and order ID for correlation purposes. | 
 
 The same response is returned for the following events.
 
@@ -157,7 +157,7 @@ The same response is returned for the following events.
 
 ## Cart line item
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/cart/lineItem/*` | Subscribe to all cart line item events. This webhook will fire when a change occurs to line items in the cart. This can be when items are added to a cart, removed or updated.(Ex. change to quantity, product options or price). |
 | `store/cart/lineItem/created` | When a new item is added to the cart  |
@@ -193,7 +193,7 @@ The same response is returned for the following events.
 
 ## Category
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/category/*` | Subscribe to all store/category events |
 | `store/category/created` | Category is created |
@@ -227,7 +227,7 @@ The same response is returned for the following events.
 
 ## Channel
 
-| Name                    | Description                                              |
+| Webhook scope                    | Description                                              |
 |-------------------------|----------------------------------------------------------|
 | `store/channel/*`       | Subscribe to all `store/channel` events.                    |
 | `store/channel/created` | Fires when a channel is created via control panel or API |
@@ -263,7 +263,7 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 ## Customer
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/customer/*` | Subscribe to all store/customer events |
 | `store/customer/created` | A new customer is created|
@@ -328,7 +328,7 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 ## Orders
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/order/*` | Subscribe to all store/order events  |
 | `store/order/created` |Fires if an order is created using the control panel, an app or via the API.|
@@ -447,7 +447,7 @@ Updates to the following fields trigger a `store/channel/updated` event.
 
 ## Products
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/product/*` | Subscribe to all store/product events |
 |`store/product/deleted`| Product is deleted|
@@ -541,7 +541,7 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 ## Shipment
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/shipment/*` | Subscribe to all store/shipment events |
 |` store/shipment/created` | Shipment is created |
@@ -576,7 +576,7 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 ## SKU
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/sku/*` |Subscribe to all store/sku events |
 | `store/sku/created` | A new sku is created |
@@ -654,7 +654,7 @@ Changes to any of the following fields will trigger a `store/product/updated` ev
 
 ## Store
 
-|Name|Description|
+|Webhook scope|Description|
 | - | - |
 | `store/app/uninstalled` | Occurs when a client store is cancelled and uninstalled from the platform |
 |`store/information/updated` | Occurs when changes are made to store settings. For a full list of fields that can trigger this event, see **Store information updated events** below |
@@ -712,7 +712,7 @@ Changes to the following store settings will trigger a `store/information/update
 <a id="webhook-events_cart"></a>
 ## Subscriber
 
-| Name | Description |
+| Webhook scope | Description |
 |-|-|
 | `store/subscriber/*` | Subscribe to all store/subscriber events |
 | `store/subscriber/created` | Subscriber is created |
